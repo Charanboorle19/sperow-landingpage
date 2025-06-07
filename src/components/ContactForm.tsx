@@ -17,7 +17,7 @@ const ContactForm = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch('https://formspree.io/f/mblydwpd', {
+      const response = await fetch('https://formspree.io/f/mqabennd', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -184,7 +184,7 @@ const ContactForm = () => {
                   onChange={handleChange}
                   rows={4}
                   className="w-full px-4 py-3 rounded-xl border border-blue-100 focus:border-blue-500 focus:ring-1 focus:ring-blue-200 transition-all duration-200 bg-white resize-none"
-                  placeholder="Tell us about your needs..."
+                  placeholder="Type here"
                   required
                   disabled={isSubmitting}
                 ></textarea>

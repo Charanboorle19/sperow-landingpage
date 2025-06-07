@@ -133,7 +133,7 @@ const HowItWorks = () => {
   };
 
   return (
-    <section className="relative py-24 overflow-hidden bg-gradient-to-b from-white via-blue-50/50 to-blue-50">
+    <section id="howitworks" className="relative py-24 overflow-hidden bg-gradient-to-b from-white via-blue-50/50 to-blue-50">
       {/* Grid Background Pattern */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:4rem_4rem]"></div>
       

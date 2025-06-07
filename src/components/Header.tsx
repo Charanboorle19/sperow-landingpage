@@ -25,7 +25,17 @@ const Header = () => {
   }, []);
 
   const scrollToSection = (sectionId: string) => {
-    const section = document.getElementById(sectionId);
+    // Map the navigation items to their correct section IDs
+    const sectionMap: { [key: string]: string } = {
+      'features': 'features',
+      'how-it-works': 'howitworks',
+      'benefits': 'benefits',
+      'contact': 'contact'
+    };
+
+    const targetId = sectionMap[sectionId.toLowerCase()];
+    const section = document.getElementById(targetId);
+    
     if (section) {
       // Close mobile menu first
       setIsMenuOpen(false);
@@ -33,14 +43,10 @@ const Header = () => {
       // Wait for menu to close before scrolling
       setTimeout(() => {
         const headerHeight = 80; // Height of the fixed header
-        const sectionTop = section.offsetTop - headerHeight;
+        const sectionTop = section.getBoundingClientRect().top + window.pageYOffset - headerHeight;
         
-        // Use scrollIntoView for better mobile compatibility
-        section.scrollIntoView({ behavior: 'smooth' });
-        
-        // Additional scroll adjustment to account for header
-        window.scrollBy({
-          top: -headerHeight,
+        window.scrollTo({
+          top: sectionTop,
           behavior: 'smooth'
         });
       }, 100);
@@ -74,16 +80,20 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            {['Features', 'How it Works', 'Benefits'].map((item, index) => (
+            {[
+              { name: 'Features', id: 'features' },
+              { name: 'How it Works', id: 'how-it-works' },
+              { name: 'Benefits', id: 'benefits' }
+            ].map((item, index) => (
               <motion.button 
-                key={item}
-                onClick={() => scrollToSection(item.toLowerCase().replace(' ', '-'))}
+                key={item.id}
+                onClick={() => scrollToSection(item.id)}
                 className="relative text-base text-gray-700 hover:text-blue-600 font-medium transition-all duration-200 py-2 group flex items-center"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
               >
-                {item}
+                {item.name}
                 <NavArrow />
                 <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-600 to-blue-800 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
               </motion.button>
@@ -132,18 +142,23 @@ const Header = () => {
               transition={{ duration: 0.3 }}
             >
               <div className="flex flex-col space-y-4">
-                {['Features', 'How it Works', 'Benefits', 'Contact'].map((item, index) => (
+                {[
+                  { name: 'Features', id: 'features' },
+                  { name: 'How it Works', id: 'how-it-works' },
+                  { name: 'Benefits', id: 'benefits' },
+                  { name: 'Contact', id: 'contact' }
+                ].map((item, index) => (
                   <motion.button 
-                    key={item}
-                    onClick={() => scrollToSection(item.toLowerCase().replace(' ', '-'))}
+                    key={item.id}
+                    onClick={() => scrollToSection(item.id)}
                     className={`text-base text-gray-700 hover:text-blue-600 px-4 py-2.5 rounded-lg hover:bg-blue-50/80 transition-all duration-200 font-medium group flex items-center ${
-                      item === 'Contact' ? 'bg-blue-600 text-white hover:text-white hover:bg-blue-700' : ''
+                      item.name === 'Contact' ? 'bg-blue-600 text-white hover:text-white hover:bg-blue-700' : ''
                     }`}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.3, delay: index * 0.1 }}
                   >
-                    {item}
+                    {item.name}
                     <NavArrow />
                   </motion.button>
                 ))}

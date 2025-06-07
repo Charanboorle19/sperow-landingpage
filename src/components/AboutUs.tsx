@@ -34,10 +34,10 @@ const AboutUs = () => {
             <Sparkles className="w-4 h-4 text-green-400 mr-2 group-hover:animate-spin" />
             <span className="text-sm font-medium text-green-500">Our Mission</span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 mb-4 md:mb-6">
             Transforming Healthcare with <span className="bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">AI Innovation</span>
           </h2>
-          <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             Empowering healthcare professionals with cutting-edge AI solutions to enhance patient care and streamline medical workflows.
           </p>
         </motion.div>
@@ -52,22 +52,22 @@ const AboutUs = () => {
             transition={{ duration: 0.6 }}
             className="flex flex-col space-y-8"
           >
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3 sm:gap-4">
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-br from-green-200 to-emerald-200 rounded-2xl blur-lg opacity-30"></div>
-                <div className="relative flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-green-300 to-emerald-300 shadow-lg">
-                  <Users className="w-8 h-8 text-white" />
+                <div className="relative flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-green-300 to-emerald-300 shadow-lg">
+                  <Users className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
                 </div>
               </div>
-              <h3 className="text-2xl font-bold text-gray-900">About Sperow</h3>
+              <h3 className="text-xl sm:text-2xl font-bold text-gray-900">About Sperow</h3>
             </div>
-            <p className="text-lg text-gray-600 leading-relaxed">
+            <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
               Sperow is an AI-powered platform designed to assist doctors by simplifying patient consultations and Pre-OPD processes. Our AI-powered tools help streamline workflows, improve efficiency, and enhance patient care — so doctors can focus on what matters most.
             </p>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <div className="flex items-center gap-3 p-4 rounded-xl bg-white/50 backdrop-blur-sm border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300">
-                <Heart className="w-5 h-5 text-red-500" />
-                <span className="text-sm font-medium text-gray-700">Patient-First</span>
+            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
+              <div className="flex items-center gap-2 sm:gap-3 p-3 sm:p-4 rounded-xl bg-white/50 backdrop-blur-sm border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300">
+                <Heart className="w-4 h-4 sm:w-5 sm:h-5 text-red-500" />
+                <span className="text-xs sm:text-sm font-medium text-gray-700">Patient-First</span>
               </div>
               <div className="flex items-center gap-3 p-4 rounded-xl bg-white/50 backdrop-blur-sm border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300">
                 <Brain className="w-5 h-5 text-blue-500" />

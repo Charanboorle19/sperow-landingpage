@@ -10,42 +10,42 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
           {/* Contact Information */}
-          <div className="space-y-6">
-            <h3 className="text-xl font-semibold text-gray-900">Contact Us</h3>
-            <div className="space-y-4">
-              <a href="mailto:contact@sperow.com" className="flex items-center gap-3 text-gray-600 hover:text-blue-600 transition-colors duration-300 group">
-                <Mail className="w-5 h-5 text-blue-500 group-hover:scale-110 transition-transform duration-300" />
+          <div className="space-y-4 sm:space-y-6">
+            <h3 className="text-lg sm:text-xl font-semibold text-gray-900">Contact Us</h3>
+            <div className="space-y-3 sm:space-y-4">
+              <a href="mailto:contact@sperow.com" className="flex items-center gap-2 sm:gap-3 text-sm sm:text-base text-gray-600 hover:text-blue-600 transition-colors duration-300 group">
+                <Mail className="w-4 h-4 sm:w-5 sm:h-5 text-blue-500 group-hover:scale-110 transition-transform duration-300" />
                 <span>contact@sperow.com</span>
-                <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <ArrowUpRight className="w-3 h-3 sm:w-4 sm:h-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </a>
-              <a href="tel:+919876543210" className="flex items-center gap-3 text-gray-600 hover:text-blue-600 transition-colors duration-300 group">
-                <Phone className="w-5 h-5 text-blue-500 group-hover:scale-110 transition-transform duration-300" />
+              <a href="tel:+919876543210" className="flex items-center gap-2 sm:gap-3 text-sm sm:text-base text-gray-600 hover:text-blue-600 transition-colors duration-300 group">
+                <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-blue-500 group-hover:scale-110 transition-transform duration-300" />
                 <span>+91 6309467988</span>
-                <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <ArrowUpRight className="w-3 h-3 sm:w-4 sm:h-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </a>
-              <a href="tel:+919876543210" className="flex items-center gap-3 text-gray-600 hover:text-blue-600 transition-colors duration-300 group">
-                <Phone className="w-5 h-5 text-blue-500 group-hover:scale-110 transition-transform duration-300" />
+              <a href="tel:+919876543210" className="flex items-center gap-2 sm:gap-3 text-sm sm:text-base text-gray-600 hover:text-blue-600 transition-colors duration-300 group">
+                <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-blue-500 group-hover:scale-110 transition-transform duration-300" />
                 <span>+91 7893815371</span>
-                <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <ArrowUpRight className="w-3 h-3 sm:w-4 sm:h-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </a>
             </div>
           </div>
 
           {/* Quick Links */}
-          <div className="space-y-6">
-            <h3 className="text-xl font-semibold text-gray-900">Quick Links</h3>
-            <div className="grid grid-cols-2 gap-4">
-              <a href="#features" className="text-gray-600 hover:text-blue-600 transition-colors duration-300">Features</a>
-              <a href="#benefits" className="text-gray-600 hover:text-blue-600 transition-colors duration-300">Benefits</a>
-              <a href="#how-it-works" className="text-gray-600 hover:text-blue-600 transition-colors duration-300">How It Works</a>
-              <a href="#about" className="text-gray-600 hover:text-blue-600 transition-colors duration-300">About Us</a>
+          <div className="space-y-4 sm:space-y-6">
+            <h3 className="text-lg sm:text-xl font-semibold text-gray-900">Quick Links</h3>
+            <div className="grid grid-cols-2 gap-3 sm:gap-4">
+              <a href="#features" className="text-sm sm:text-base text-gray-600 hover:text-blue-600 transition-colors duration-300">Features</a>
+              <a href="#benefits" className="text-sm sm:text-base text-gray-600 hover:text-blue-600 transition-colors duration-300">Benefits</a>
+              <a href="#how-it-works" className="text-sm sm:text-base text-gray-600 hover:text-blue-600 transition-colors duration-300">How It Works</a>
+              <a href="#about" className="text-sm sm:text-base text-gray-600 hover:text-blue-600 transition-colors duration-300">About Us</a>
             </div>
           </div>
 
           {/* Company Info */}
-          <div className="space-y-6">
-            <h3 className="text-xl font-semibold text-gray-900">Sperow</h3>
-            <p className="text-gray-600 max-w-md">
+          <div className="space-y-4 sm:space-y-6">
+            <h3 className="text-lg sm:text-xl font-semibold text-gray-900">Sperow</h3>
+            <p className="text-sm sm:text-base text-gray-600 max-w-md">
               Transforming healthcare delivery with AI-powered solutions that enhance patient care and streamline medical workflows.
             </p>
           </div>
