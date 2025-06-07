@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { ArrowRight, CheckCircle, Sparkles, ChevronRight, Stethoscope, LogIn, Calendar, PlayCircle, FileText, Mic, FileCheck, Edit, MessageSquare, Send, Play } from 'lucide-react';
-import preOpVideo from '../assets/pre-op.mp4';
+import preOpVideo from '../assets/preop1.mp4';
 import appointmentsVideo from '../assets/appointment.mp4';
 import aiUnderstandingVideo from '../assets/ai-3.mp4';
 import startConsultationVideo from '../assets/start-consultation.mp4';
