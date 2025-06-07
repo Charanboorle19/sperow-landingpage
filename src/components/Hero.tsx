@@ -138,7 +138,7 @@ const Hero = () => {
           </button>
           
         </div>
-        <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 md:gap-8 text-xs md:text-sm pt-4">
+        <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 md:gap-8 text-xs md:text-sm pt-0 md:pt-4">
           {[
             { icon: CheckCircle, text: "No setup required", color: "text-green-500" }
           ].map((item, index) => (

@@ -18,12 +18,12 @@ const Footer = () => {
                 <span>contact@sperow.com</span>
                 <ArrowUpRight className="w-3 h-3 sm:w-4 sm:h-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </a>
-              <a href="tel:+919876543210" className="flex items-center gap-2 sm:gap-3 text-sm sm:text-base text-gray-600 hover:text-blue-600 transition-colors duration-300 group">
+              <a href="tel:+916309467988" className="flex items-center gap-2 sm:gap-3 text-sm sm:text-base text-gray-600 hover:text-blue-600 transition-colors duration-300 group">
                 <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-blue-500 group-hover:scale-110 transition-transform duration-300" />
                 <span>+91 6309467988</span>
                 <ArrowUpRight className="w-3 h-3 sm:w-4 sm:h-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </a>
-              <a href="tel:+919876543210" className="flex items-center gap-2 sm:gap-3 text-sm sm:text-base text-gray-600 hover:text-blue-600 transition-colors duration-300 group">
+              <a href="tel:+917893815371" className="flex items-center gap-2 sm:gap-3 text-sm sm:text-base text-gray-600 hover:text-blue-600 transition-colors duration-300 group">
                 <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-blue-500 group-hover:scale-110 transition-transform duration-300" />
                 <span>+91 7893815371</span>
                 <ArrowUpRight className="w-3 h-3 sm:w-4 sm:h-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
