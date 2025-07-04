@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Brain, FileUp, History, Mic, Pill, MessageCircle, Smartphone, Users, Zap, Stethoscope, ClipboardList, FileText, Clock, MessageSquare, Send, QrCode } from 'lucide-react';
+import { Brain, FileUp, History, Mic, Pill, MessageCircle, Smartphone, Users, Zap, Stethoscope, ClipboardList, FileText, Clock, MessageSquare, Send, QrCode, Sparkles } from 'lucide-react';
 
 const services = [
   {
@@ -55,6 +55,13 @@ const services = [
     icon: QrCode,
     title: "Queue & Token Management",
     desc: "Seamless patient flow — doctors manage current & upcoming patients easily.",
+    appointment: "#",
+    price: "#"
+  },
+  {
+    icon: Sparkles,
+    title: "Smart Treatment & Prescription Management",
+    desc: "Easily save and reuse personalized treatment plans. Update medicines and tests anytime with just a few clicks, streamlining patient care efficiently.",
     appointment: "#",
     price: "#"
   }

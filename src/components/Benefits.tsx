@@ -46,9 +46,9 @@ const benefits = [
     color: "text-blue-700 bg-blue-100"
   },
   {
-    icon: Users,
-    title: "Versatile for Clinics & Hospitals",
-    desc: "The platform is designed to integrate seamlessly into diverse medical environments",
+    icon: Sparkles,
+    title: "Smart Treatment & Prescription Management",
+    desc: "Easily save and reuse personalized treatment plans. Update medicines and tests anytime with just a few clicks, streamlining patient care efficiently.",
     color: "text-emerald-700 bg-emerald-100"
   },
   {
