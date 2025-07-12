@@ -80,9 +80,8 @@ const Header = () => {
             >
               <div className="relative flex items-center gap-2">
                 <span className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent tracking-tight">
-                  Sperow
+                  SPEROWERSE
                 </span>
-                <span className="text-2xl md:text-3xl font-bold text-blue-600 tracking-tight">AI</span>
                 <div className="h-6 w-6 md:h-7 md:w-7 rounded-full bg-blue-600/10 flex items-center justify-center">
                   <Sparkles className="w-3 h-3 md:w-4 md:h-4 text-blue-600" />
                 </div>
