@@ -18,6 +18,11 @@ const Footer = () => {
                 <span>contact@sperow.com</span>
                 <ArrowUpRight className="w-3 h-3 sm:w-4 sm:h-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </a>
+              <a href="tel:+918978222739" className="flex items-center gap-2 sm:gap-3 text-sm sm:text-base text-gray-600 hover:text-blue-600 transition-colors duration-300 group">
+                <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-blue-500 group-hover:scale-110 transition-transform duration-300" />
+                <span>+91 8978222739</span>
+                <ArrowUpRight className="w-3 h-3 sm:w-4 sm:h-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              </a>
               <a href="tel:+916309467988" className="flex items-center gap-2 sm:gap-3 text-sm sm:text-base text-gray-600 hover:text-blue-600 transition-colors duration-300 group">
                 <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-blue-500 group-hover:scale-110 transition-transform duration-300" />
                 <span>+91 6309467988</span>
@@ -28,6 +33,10 @@ const Footer = () => {
                 <span>+91 7893815371</span>
                 <ArrowUpRight className="w-3 h-3 sm:w-4 sm:h-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </a>
+              <div className="flex items-start gap-2 sm:gap-3 text-sm sm:text-base text-gray-600 group">
+                <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-blue-500 mt-0.5" />
+                <span>Banjara hills Road no 3, Hyderabad, Telangana, India</span>
+              </div>
             </div>
           </div>
 
@@ -44,7 +53,7 @@ const Footer = () => {
 
           {/* Company Info */}
           <div className="space-y-4 sm:space-y-6">
-            <h3 className="text-lg sm:text-xl font-semibold text-gray-900">Sperow</h3>
+            <h3 className="text-lg sm:text-xl font-semibold text-gray-900">SPEROWERSE PRIVATE LIMITED</h3>
             <p className="text-sm sm:text-base text-gray-600 max-w-md">
               Transforming healthcare delivery with AI-powered solutions that enhance patient care and streamline medical workflows.
             </p>
@@ -55,7 +64,7 @@ const Footer = () => {
         <div className="mt-12 pt-8 border-t border-gray-200">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-gray-600 text-sm">
-              © {new Date().getFullYear()} Sperow. All rights reserved.
+              © {new Date().getFullYear()} SPEROWERSE PRIVATE LIMITED. All rights reserved.
             </p>
             <div className="flex items-center gap-6 text-sm">
               <a href="#" className="text-gray-600 hover:text-blue-600 transition-colors duration-300">Privacy Policy</a>

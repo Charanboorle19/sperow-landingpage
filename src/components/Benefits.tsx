@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Clock, FileText, Mic, Lock, ClipboardList, MessageCircle, Users, Zap, Sparkles, ArrowRight } from 'lucide-react';
 
 const benefits = [
   {
     icon: Clock,
-    title: "Save Up to 6 Minutes Per Patient",
-    desc: "Significantly reduce administrative time, allowing more focus on diagnosis and patient interaction.",
+    title: "Dedicated Patient Database with AI Research",
+    desc: "Access a comprehensive patient database with AI-powered query and research capabilities for enhanced clinical decision-making.",
     color: "text-blue-600 bg-blue-50"
   },
   {
@@ -64,6 +64,7 @@ const Benefits = () => {
   const [isHovering, setIsHovering] = useState(false);
   const [floatY, setFloatY] = useState(0);
   const [deviceOrientation, setDeviceOrientation] = useState({ x: 0, y: 0 });
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   // Device motion handler
   useEffect(() => {
@@ -123,6 +124,18 @@ const Benefits = () => {
     setMousePosition({ x: rotateY, y: rotateX });
   };
 
+  const scrollLeft = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: -320, behavior: 'smooth' });
+    }
+  };
+
+  const scrollRight = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: 320, behavior: 'smooth' });
+    }
+  };
+
   return (
     <section 
       id="benefits" 
@@ -151,7 +164,69 @@ const Benefits = () => {
           </div>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Mobile: Horizontal scrollable layout */}
+        <div className="md:hidden">
+          <div ref={scrollContainerRef} className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
+            {benefits.map((benefit, idx) => (
+              <div
+                key={idx}
+                className="group relative bg-gradient-to-br from-white to-blue-50/50 rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300 flex-shrink-0 w-80"
+                style={{
+                  transform: isHovering 
+                    ? `perspective(900px) rotateX(${mousePosition.y}deg) rotateY(${mousePosition.x}deg) translateZ(10px) translateY(${floatY}px)`
+                    : `perspective(900px) rotateX(${deviceOrientation.y}deg) rotateY(${deviceOrientation.x}deg) translateZ(10px) translateY(${floatY}px)`,
+                  transition: 'transform 0.2s ease-out'
+                }}
+              >
+                {/* Content Container */}
+                <div className="relative p-6 flex flex-col h-full">
+                  {/* Icon and Number Container */}
+                  <div className="flex items-center justify-between mb-4">
+                    <div className={`inline-flex p-3 rounded-xl ${benefit.color} transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg`}>
+                      <benefit.icon className="w-5 h-5" />
+                    </div>
+                    <span className="text-lg font-bold text-gray-200 group-hover:text-gray-300 transition-colors duration-300">
+                      {String(idx + 1).padStart(2, '0')}
+                    </span>
+                  </div>
+
+                  {/* Text Content */}
+                  <div>
+                    <h3 className="text-lg font-bold text-gray-900 mb-3 group-hover:text-blue-700 transition-colors duration-200">
+                      {benefit.title}
+                    </h3>
+                    <p className="text-gray-600 group-hover:text-gray-800 text-sm leading-relaxed">
+                      {benefit.desc}
+                    </p>
+                  </div>
+
+                  {/* Hover Effects */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-50/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                  <div className="absolute -inset-1 bg-gradient-to-br from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl pointer-events-none"></div>
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          {/* Mobile Navigation Arrows */}
+          <div className="flex justify-center items-center gap-4 mt-6">
+            <button 
+              onClick={scrollLeft}
+              className="p-3 rounded-full bg-blue-600 text-white hover:bg-blue-700 transition-colors duration-300 shadow-lg"
+            >
+              <ArrowRight className="w-5 h-5 rotate-180" />
+            </button>
+            <button 
+              onClick={scrollRight}
+              className="p-3 rounded-full bg-blue-600 text-white hover:bg-blue-700 transition-colors duration-300 shadow-lg"
+            >
+              <ArrowRight className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
+
+        {/* Desktop: Original grid layout */}
+        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {benefits.map((benefit, idx) => (
             <div
               key={idx}

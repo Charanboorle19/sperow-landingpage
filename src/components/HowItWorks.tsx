@@ -1,18 +1,11 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { ArrowRight, CheckCircle, Sparkles, ChevronRight, Stethoscope, LogIn, Calendar, PlayCircle, FileText, Mic, FileCheck, Edit, MessageSquare, Send, Play } from 'lucide-react';
-import preOpVideo from '../assets/preop1.mp4';
-import appointmentsVideo from '../assets/appointment.mp4';
-import aiUnderstandingVideo from '../assets/ai-3.mp4';
-import startConsultationVideo from '../assets/start-consultation.mp4';
-import loginVideo from '../assets/login.mp4';
-import medicalSummaryVideo from '../assets/medical-2.mp4';
-import prescriptionVideo from '../assets/prescription (online-video-cutter.com).mp4';
-import endVideo from '../assets/end (online-video-cutter.com).mp4';
+import { ArrowRight, CheckCircle, Sparkles, ChevronRight, Stethoscope, LogIn, Calendar, PlayCircle, FileText, Mic, FileCheck, Edit, MessageSquare, Send, Play, Plus, QrCode, ClipboardList, Upload, MessageCircle, Ticket, Database } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface PatientStep {
   title: string;
   subtitle: string;
+  icon: React.ComponentType<{ className?: string }>;
 }
 
 interface DoctorStep {
@@ -24,23 +17,28 @@ interface DoctorStep {
 const patientSteps: PatientStep[] = [
   {
     title: 'Scan QR Code',
-    subtitle: 'Patient scans a QR code at the hospital or clinic to begin the digital pre-op process.'
+    subtitle: 'Patient scans a QR code at the hospital or clinic to begin the digital pre-op process.',
+    icon: QrCode
   },
   {
     title: 'Fill Pre-Op Form',
-    subtitle: 'Patient fills out a secure online form with personal and medical details, guided by AI.'
+    subtitle: 'Patient fills out a secure online form with personal and medical details, guided by AI.',
+    icon: ClipboardList
   },
   {
     title: 'Upload Medical Reports',
-    subtitle: 'Upload any existing or recent medical reports for a more complete health profile.'
+    subtitle: 'Upload any existing or recent medical reports for a more complete health profile.',
+    icon: Upload
   },
   {
     title: 'Answer AI Health Questions',
-    subtitle: 'AI asks relevant health questions to ensure all necessary information is collected.'
+    subtitle: 'AI asks relevant health questions to ensure all necessary information is collected.',
+    icon: MessageCircle
   },
   {
     title: 'Get Appointment Token',
-    subtitle: "A unique token is generated for the patient's appointment, streamlining the check-in process."
+    subtitle: "A unique token is generated for the patient's appointment, streamlining the check-in process.",
+    icon: Ticket
   }
 ];
 
@@ -58,7 +56,7 @@ const doctorSteps: DoctorStep[] = [
   {
     title: 'Start Consultation',
     subtitle: 'Begin the consultation process by accessing the patient\'s pre-op information.',
-    icon: PlayCircle
+    icon: Plus
   },
   {
     title: 'Review AI Analysis',
@@ -79,57 +77,77 @@ const doctorSteps: DoctorStep[] = [
     title: 'Close & Share',
     subtitle: 'Complete consultation and automatically share prescription via WhatsApp/SMS.',
     icon: Send
+  },
+  {
+    title: 'Patient Database & Reports',
+    subtitle: 'Access comprehensive patient database, view historical reports, and query patient information using AI.',
+    icon: Database
   }
 ];
 
 const HowItWorks = () => {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [isHovering, setIsHovering] = useState(false);
-  const [hoverTransform, setHoverTransform] = useState('');
-  const [floatY, setFloatY] = useState(0);
   const [activeStep, setActiveStep] = useState(0);
   const [activeDoctorStep, setActiveDoctorStep] = useState(0);
-  const [showVideo, setShowVideo] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const patientScrollRef = useRef<HTMLDivElement>(null);
+  const doctorScrollRef = useRef<HTMLDivElement>(null);
 
-  // Floating animation using JS
+  // Check if mobile
   useEffect(() => {
-    let frame: number;
-    let start: number | null = null;
-    const animate = (timestamp: number) => {
-      if (!start) start = timestamp;
-      const elapsed = timestamp - start;
-      const y = Math.sin((elapsed / 4000) * 2 * Math.PI) * 12;
-      setFloatY(y);
-      frame = requestAnimationFrame(animate);
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024); // lg breakpoint
     };
-    frame = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(frame);
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  // Mouse move handler for 3D parallax
-  const handleMouseMove = (e: React.MouseEvent) => {
-    setIsHovering(true);
-    const rect = videoRef.current?.getBoundingClientRect();
-    if (!rect) return;
-    const x = e.clientX - rect.left - rect.width / 2;
-    const y = e.clientY - rect.top - rect.height / 2;
-    const rotateX = Math.max(Math.min(-y / 24, 10), -10);
-    const rotateY = Math.max(Math.min(x / 24, 10), -10);
-    const scale = 1.08;
-    setHoverTransform(`perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(${scale})`);
-  };
+  // Auto-cycle for mobile
+  useEffect(() => {
+    if (!isMobile) return;
 
-  const handleMouseLeave = () => {
-    setIsHovering(false);
-    setHoverTransform('');
-  };
+    const patientInterval = setInterval(() => {
+      setActiveStep((prev) => (prev + 1) % patientSteps.length);
+    }, 2000);
 
-  // Combine floating and hover transforms
-  const combinedTransform = `${hoverTransform || 'perspective(900px) scale(1)'} translateY(${floatY}px)`;
+    const doctorInterval = setInterval(() => {
+      setActiveDoctorStep((prev) => (prev + 1) % doctorSteps.length);
+    }, 2000);
+
+    return () => {
+      clearInterval(patientInterval);
+      clearInterval(doctorInterval);
+    };
+  }, [isMobile]);
 
   const renderStepIcon = (step: DoctorStep) => {
     const Icon = step.icon;
     return <Icon className="w-16 h-16 text-emerald-500 relative z-10" />;
+  };
+
+  const scrollPatientLeft = () => {
+    if (patientScrollRef.current) {
+      patientScrollRef.current.scrollBy({ left: -320, behavior: 'smooth' });
+    }
+  };
+
+  const scrollPatientRight = () => {
+    if (patientScrollRef.current) {
+      patientScrollRef.current.scrollBy({ left: 320, behavior: 'smooth' });
+    }
+  };
+
+  const scrollDoctorLeft = () => {
+    if (doctorScrollRef.current) {
+      doctorScrollRef.current.scrollBy({ left: -320, behavior: 'smooth' });
+    }
+  };
+
+  const scrollDoctorRight = () => {
+    if (doctorScrollRef.current) {
+      doctorScrollRef.current.scrollBy({ left: 320, behavior: 'smooth' });
+    }
   };
 
   return (
@@ -165,75 +183,125 @@ const HowItWorks = () => {
 
           {/* Patient Flow Content */}
           <div className="flex flex-col lg:flex-row gap-12 items-center">
-            {/* Left: Steps */}
-            <div className="flex-1 space-y-3">
-              {patientSteps.map((step, idx) => (
-                <div 
-                  key={idx} 
-                  className="group relative"
-                  onMouseEnter={() => setActiveStep(idx)}
-                >
-                  <div className="flex items-start gap-4">
-                    {/* Step Number with Gradient Border */}
-                    <div className="flex-shrink-0 relative">
-                      <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full blur-sm opacity-50 group-hover:opacity-100 transition-opacity duration-300"></div>
-                      <div className="relative w-12 h-12 flex items-center justify-center rounded-full bg-white shadow-lg group-hover:scale-110 transition-transform duration-300">
-                        <span className="text-lg font-bold bg-gradient-to-br from-blue-600 to-blue-700 bg-clip-text text-transparent">
+            {/* Mobile: Horizontal scrollable layout */}
+            <div className="lg:hidden w-full">
+              <div ref={patientScrollRef} className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
+                {patientSteps.map((step, idx) => (
+                  <div
+                    key={idx}
+                    className="group relative bg-gradient-to-br from-white to-blue-50/50 rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300 flex-shrink-0 w-80"
+                  >
+                    {/* Content Container */}
+                    <div className="relative p-6 flex flex-col h-full">
+                      {/* Icon and Number Container */}
+                      <div className="flex items-center justify-between mb-4">
+                        <div className="inline-flex p-3 rounded-xl bg-blue-50 transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg">
+                          <step.icon className="w-5 h-5 text-blue-600" />
+                        </div>
+                        <span className="text-lg font-bold text-gray-200 group-hover:text-gray-300 transition-colors duration-300">
                           {String(idx + 1).padStart(2, '0')}
                         </span>
                       </div>
-                    </div>
-                    
-                    {/* Step Content */}
-                    <div className="flex-1 relative">
-                      {/* Content Background */}
-                      <div className="absolute inset-0 bg-gradient-to-r from-blue-50 to-blue-100 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                      
-                      {/* Content */}
-                      <div className="relative p-4">
-                        <h3 className="text-lg font-bold text-gray-900 mb-1 group-hover:text-blue-600 transition-colors duration-300 flex items-center gap-2">
+
+                      {/* Text Content */}
+                      <div>
+                        <h3 className="text-lg font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors duration-200">
                           {step.title}
-                          <ChevronRight className="w-4 h-4 text-blue-500 opacity-0 group-hover:opacity-100 transform group-hover:translate-x-1 transition-all duration-300" />
                         </h3>
-                        <p className="text-gray-600 text-sm leading-relaxed">
+                        <p className="text-gray-600 group-hover:text-gray-800 text-sm leading-relaxed">
                           {step.subtitle}
                         </p>
                       </div>
+
+                      {/* Hover Effects */}
+                      <div className="absolute inset-0 bg-gradient-to-br from-blue-50/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                      <div className="absolute -inset-1 bg-gradient-to-br from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl pointer-events-none"></div>
                     </div>
                   </div>
-
-                  {/* Connecting Line */}
-                  {idx < patientSteps.length - 1 && (
-                    <div className="absolute left-6 top-12 w-0.5 h-4 bg-gradient-to-b from-blue-500/50 to-blue-400/50 group-hover:from-blue-500 group-hover:to-blue-400 transition-colors duration-300"></div>
-                  )}
-                </div>
-              ))}
+                ))}
+              </div>
+              
+              {/* Mobile Navigation Arrows */}
+              <div className="flex justify-center items-center gap-4 mt-6">
+                <button 
+                  onClick={scrollPatientLeft}
+                  className="p-3 rounded-full bg-blue-600 text-white hover:bg-blue-700 transition-colors duration-300 shadow-lg"
+                >
+                  <ArrowRight className="w-5 h-5 rotate-180" />
+                </button>
+                <button 
+                  onClick={scrollPatientRight}
+                  className="p-3 rounded-full bg-blue-600 text-white hover:bg-blue-700 transition-colors duration-300 shadow-lg"
+                >
+                  <ArrowRight className="w-5 h-5" />
+                </button>
+              </div>
             </div>
 
-            {/* Right: Video */}
-            <div 
-              className="flex-1 relative flex items-center justify-center"
-              onMouseMove={handleMouseMove}
-              onMouseLeave={handleMouseLeave}
-              style={{ perspective: '900px' }}
-            >
-              <div className="relative w-[300px] rounded-3xl">
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-blue-600/10 rounded-3xl"></div>
-                <video
-                  ref={videoRef}
-                  src={preOpVideo}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  controls
-                  className="w-full h-auto rounded-3xl"
-                  style={{ transform: combinedTransform }}
-                />
+            {/* Desktop: Original layout */}
+            <div className="hidden lg:flex lg:flex-row gap-12 items-center w-full">
+              {/* Left: Steps */}
+              <div className="flex-1 space-y-3">
+                {patientSteps.map((step, idx) => (
+                  <div 
+                    key={idx} 
+                    className="group relative"
+                    onMouseEnter={() => setActiveStep(idx)}
+                  >
+                    <div className="flex items-start gap-4">
+                      {/* Step Number with Gradient Border */}
+                      <div className="flex-shrink-0 relative">
+                        <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full blur-sm opacity-50 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        <div className="relative w-12 h-12 flex items-center justify-center rounded-full bg-white shadow-lg group-hover:scale-110 transition-transform duration-300">
+                          <span className="text-lg font-bold bg-gradient-to-br from-blue-600 to-blue-700 bg-clip-text text-transparent">
+                            {String(idx + 1).padStart(2, '0')}
+                          </span>
+                        </div>
+                      </div>
+                      
+                      {/* Step Content */}
+                      <div className="flex-1 relative">
+                        {/* Content Background */}
+                        <div className="absolute inset-0 bg-gradient-to-r from-blue-50 to-blue-100 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        
+                        {/* Content */}
+                        <div className="relative p-4">
+                          <h3 className="text-lg font-bold text-gray-900 mb-1 group-hover:text-blue-600 transition-colors duration-300 flex items-center gap-2">
+                            {step.title}
+                            <ChevronRight className="w-4 h-4 text-blue-500 opacity-0 group-hover:opacity-100 transform group-hover:translate-x-1 transition-all duration-300" />
+                          </h3>
+                          <p className="text-gray-600 text-sm leading-relaxed">
+                            {step.subtitle}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Connecting Line */}
+                    {idx < patientSteps.length - 1 && (
+                      <div className="absolute left-6 top-12 w-0.5 h-4 bg-gradient-to-b from-blue-500/50 to-blue-400/50 group-hover:from-blue-500 group-hover:to-blue-400 transition-colors duration-300"></div>
+                    )}
+                  </div>
+                ))}
               </div>
-              {/* Decorative Elements */}
-              <div className="absolute -top-4 -right-4 w-20 h-20 bg-gradient-to-br from-blue-400 to-blue-500 rounded-full blur-2xl opacity-30 animate-pulse"></div>
-              <div className="absolute -bottom-4 -left-4 w-24 h-24 bg-gradient-to-br from-blue-300 to-blue-400 rounded-full blur-2xl opacity-30 animate-pulse animation-delay-2000"></div>
+
+              {/* Right: Icon Display */}
+              <div className="flex-1 relative flex items-center justify-center">
+                <div className="relative w-[300px] h-[300px] rounded-3xl bg-gradient-to-br from-blue-50 to-blue-100 flex items-center justify-center">
+                  <div className="text-center">
+                    {(() => {
+                      const Icon = patientSteps[activeStep]?.icon || Sparkles;
+                      return <Icon className="w-16 h-16 text-blue-500 mx-auto mb-4 transition-all duration-300" />;
+                    })()}
+                    <p className="text-blue-600 font-medium">
+                      {patientSteps[activeStep]?.title || "Patient Journey"}
+                    </p>
+                  </div>
+                </div>
+                {/* Decorative Elements */}
+                <div className="absolute -top-4 -right-4 w-20 h-20 bg-gradient-to-br from-blue-400 to-blue-500 rounded-full blur-2xl opacity-30 animate-pulse"></div>
+                <div className="absolute -bottom-4 -left-4 w-24 h-24 bg-gradient-to-br from-blue-300 to-blue-400 rounded-full blur-2xl opacity-30 animate-pulse animation-delay-2000"></div>
+              </div>
             </div>
           </div>
         </div>
@@ -258,189 +326,131 @@ const HowItWorks = () => {
 
           {/* Doctor Flow Content */}
           <div className="flex flex-col lg:flex-row gap-16 items-center">
-            {/* Left: Steps */}
-            <div className="flex-1 max-w-2xl space-y-3 relative">
-              {doctorSteps.map((step, idx) => (
-                <div key={idx}>
-                  <div 
-                    className={`group relative`}
-                    onMouseEnter={() => setActiveDoctorStep(idx)}
+            {/* Mobile: Horizontal scrollable layout */}
+            <div className="lg:hidden w-full">
+              <div ref={doctorScrollRef} className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
+                {doctorSteps.map((step, idx) => (
+                  <div
+                    key={idx}
+                    className="group relative bg-gradient-to-br from-white to-emerald-50/50 rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300 flex-shrink-0 w-80"
                   >
-                    <div className="flex items-start gap-4">
-                      {/* Step Number with Gradient Border */}
-                      <div className="flex-shrink-0 relative">
-                        <div className="absolute inset-0 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-full blur-sm opacity-50 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        <div className="relative w-12 h-12 flex items-center justify-center rounded-full bg-white shadow-lg group-hover:scale-110 transition-transform duration-300">
-                          <span className="text-lg font-bold bg-gradient-to-br from-emerald-600 to-emerald-700 bg-clip-text text-transparent">
-                            {String(idx + 1).padStart(2, '0')}
-                          </span>
+                    {/* Content Container */}
+                    <div className="relative p-6 flex flex-col h-full">
+                      {/* Icon and Number Container */}
+                      <div className="flex items-center justify-between mb-4">
+                        <div className="inline-flex p-3 rounded-xl bg-emerald-50 transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg">
+                          <step.icon className="w-5 h-5 text-emerald-600" />
                         </div>
+                        <span className="text-lg font-bold text-gray-200 group-hover:text-gray-300 transition-colors duration-300">
+                          {String(idx + 1).padStart(2, '0')}
+                        </span>
                       </div>
-                      
-                      {/* Step Content */}
-                      <div className="flex-1 relative">
-                        {/* Content Background */}
-                        <div className="absolute inset-0 bg-gradient-to-r from-emerald-50 to-emerald-100 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        {/* Content */}
-                        <div className="relative p-4">
-                          <h3 className="text-lg font-bold text-gray-900 mb-1 group-hover:text-emerald-600 transition-colors duration-300 flex items-center gap-2">
-                            {step.title}
-                            <ChevronRight className="w-4 h-4 text-emerald-500 opacity-0 group-hover:opacity-100 transform group-hover:translate-x-1 transition-all duration-300" />
-                          </h3>
-                          <p className="text-gray-600 text-sm leading-relaxed">
-                            {step.subtitle}
-                          </p>
-                          {/* Mobile View Demo Button */}
-                          <button 
-                            onClick={() => {
-                              setActiveDoctorStep(idx);
-                              setShowVideo(true);
-                            }}
-                            className="lg:hidden mt-4 inline-flex items-center gap-2 px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors duration-300"
-                          >
-                            <Play className="w-4 h-4" />
-                            <span>View Demo</span>
-                          </button>
-                        </div>
+
+                      {/* Text Content */}
+                      <div>
+                        <h3 className="text-lg font-bold text-gray-900 mb-3 group-hover:text-emerald-600 transition-colors duration-200">
+                          {step.title}
+                        </h3>
+                        <p className="text-gray-600 group-hover:text-gray-800 text-sm leading-relaxed">
+                          {step.subtitle}
+                        </p>
                       </div>
+
+                      {/* Hover Effects */}
+                      <div className="absolute inset-0 bg-gradient-to-br from-emerald-50/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                      <div className="absolute -inset-1 bg-gradient-to-br from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl pointer-events-none"></div>
                     </div>
-
-                    {/* Connecting Line */}
-                    {idx < doctorSteps.length - 1 && (
-                      <div className="absolute left-6 top-12 w-0.5 h-4 bg-gradient-to-b from-emerald-500/50 to-emerald-400/50 group-hover:from-emerald-500 group-hover:to-emerald-400 transition-colors duration-300"></div>
-                    )}
                   </div>
-
-                  {/* Mobile Video Section - Inline */}
-                  <AnimatePresence>
-                    {showVideo && activeDoctorStep === idx && (
-                      <motion.div 
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: "auto" }}
-                        exit={{ opacity: 0, height: 0 }}
-                        transition={{ duration: 0.3, ease: "easeInOut" }}
-                        className="lg:hidden w-full mt-4 mb-8 overflow-hidden"
-                      >
-                        <motion.div 
-                          initial={{ y: 20, opacity: 0 }}
-                          animate={{ y: 0, opacity: 1 }}
-                          exit={{ y: 20, opacity: 0 }}
-                          transition={{ duration: 0.3, delay: 0.1 }}
-                          className="relative w-full"
-                        >
-                          {/* Video Container */}
-                          <motion.div 
-                            className="relative w-full"
-                            initial={{ scale: 0.95 }}
-                            animate={{ scale: 1 }}
-                            transition={{ duration: 0.2 }}
-                          >
-                            <video
-                              src={
-                                activeDoctorStep === 0 ? loginVideo :
-                                activeDoctorStep === 1 ? appointmentsVideo :
-                                activeDoctorStep === 2 ? startConsultationVideo :
-                                activeDoctorStep === 3 ? aiUnderstandingVideo :
-                                activeDoctorStep === 4 ? medicalSummaryVideo :
-                                activeDoctorStep === 5 ? prescriptionVideo :
-                                activeDoctorStep === 6 ? endVideo :
-                                ''
-                              }
-                              autoPlay
-                              loop
-                              muted
-                              playsInline
-                              controls
-                              className="w-full aspect-video object-contain rounded-2xl"
-                            />
-                          </motion.div>
-
-                          {/* Close Button */}
-                          <motion.button 
-                            initial={{ y: 20, opacity: 0 }}
-                            animate={{ y: 0, opacity: 1 }}
-                            exit={{ y: 20, opacity: 0 }}
-                            transition={{ duration: 0.3, delay: 0.4 }}
-                            onClick={() => setShowVideo(false)}
-                            className="mt-4 w-full px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors duration-300"
-                          >
-                            Close Demo
-                          </motion.button>
-                        </motion.div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-              ))}
+                ))}
+              </div>
+              
+              {/* Mobile Navigation Arrows */}
+              <div className="flex justify-center items-center gap-4 mt-6">
+                <button 
+                  onClick={scrollDoctorLeft}
+                  className="p-3 rounded-full bg-emerald-600 text-white hover:bg-emerald-700 transition-colors duration-300 shadow-lg"
+                >
+                  <ArrowRight className="w-5 h-5 rotate-180" />
+                </button>
+                <button 
+                  onClick={scrollDoctorRight}
+                  className="p-3 rounded-full bg-emerald-600 text-white hover:bg-emerald-700 transition-colors duration-300 shadow-lg"
+                >
+                  <ArrowRight className="w-5 h-5" />
+                </button>
+              </div>
             </div>
 
-            {/* Right: Video Section - Desktop Only */}
-            <div className="flex-1 relative min-h-[1000px] hidden lg:block">
-              {/* Animated Background Elements */}
-              <div className="absolute inset-0 pointer-events-none -z-10">
-                <div className="absolute top-12 left-1/4 w-72 h-72 bg-emerald-100 rounded-full blur-3xl opacity-40 animate-blob"></div>
-                <div className="absolute bottom-16 right-1/4 w-96 h-96 bg-emerald-200 rounded-full blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
-                {/* Animated Medical Icons */}
-                <Stethoscope className="absolute top-24 right-24 w-12 h-12 text-emerald-400 opacity-60 animate-float-slow" />
-                <FileText className="absolute bottom-24 left-24 w-10 h-10 text-emerald-300 opacity-50 animate-float" />
-              </div>
-              {[0,1,2,3,4,5,6].includes(activeDoctorStep) && (
-                <div
-                  className="absolute left-0 w-[500px] md:w-[650px] flex flex-col items-center transition-all duration-500"
-                  style={{ 
-                    top: `calc(${activeDoctorStep} * 100px)`,
-                    paddingBottom: '100px'
-                  }}
-                >
-                  {/* Video Container */}
-                  <div className="relative w-full">
-                    <video
-                      src={
-                        activeDoctorStep === 0 ? loginVideo :
-                        activeDoctorStep === 1 ? appointmentsVideo :
-                        activeDoctorStep === 2 ? startConsultationVideo :
-                        activeDoctorStep === 3 ? aiUnderstandingVideo :
-                        activeDoctorStep === 4 ? medicalSummaryVideo :
-                        activeDoctorStep === 5 ? prescriptionVideo :
-                        activeDoctorStep === 6 ? endVideo :
-                        ''
-                      }
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      controls
-                      className="w-full aspect-video object-contain rounded-2xl"
-                    />
-                  </div>
+            {/* Desktop: Original layout */}
+            <div className="hidden lg:flex lg:flex-row gap-16 items-center w-full">
+              {/* Left: Steps */}
+              <div className="flex-1 max-w-2xl space-y-3 relative">
+                {doctorSteps.map((step, idx) => (
+                  <div key={idx}>
+                    <div 
+                      className={`group relative`}
+                      onMouseEnter={() => setActiveDoctorStep(idx)}
+                    >
+                      <div className="flex items-start gap-4">
+                        {/* Step Number with Gradient Border */}
+                        <div className="flex-shrink-0 relative">
+                          <div className="absolute inset-0 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-full blur-sm opacity-50 group-hover:opacity-100 transition-opacity duration-300"></div>
+                          <div className="relative w-12 h-12 flex items-center justify-center rounded-full bg-white shadow-lg group-hover:scale-110 transition-transform duration-300">
+                            <span className="text-lg font-bold bg-gradient-to-br from-emerald-600 to-emerald-700 bg-clip-text text-transparent">
+                              {String(idx + 1).padStart(2, '0')}
+                            </span>
+                          </div>
+                        </div>
+                        
+                        {/* Step Content */}
+                        <div className="flex-1 relative">
+                          {/* Content Background */}
+                          <div className="absolute inset-0 bg-gradient-to-r from-emerald-50 to-emerald-100 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                          {/* Content */}
+                          <div className="relative p-4">
+                            <h3 className="text-lg font-bold text-gray-900 mb-1 group-hover:text-emerald-600 transition-colors duration-300 flex items-center gap-2">
+                              {step.title}
+                              <ChevronRight className="w-4 h-4 text-emerald-500 opacity-0 group-hover:opacity-100 transform group-hover:translate-x-1 transition-all duration-300" />
+                            </h3>
+                            <p className="text-gray-600 text-sm leading-relaxed">
+                              {step.subtitle}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
 
-                  {/* Description Card */}
-                  <div className="mt-6 w-full max-w-md">
-                    <div className="bg-white/80 backdrop-blur-sm rounded-xl p-4 shadow-lg border border-gray-100 transform transition-all duration-300 group-hover:scale-105">
-                      <h3 className="text-lg font-semibold text-emerald-700 mb-2">
-                        {doctorSteps[activeDoctorStep]?.title}
-                      </h3>
-                      <p className="text-gray-600 leading-relaxed">
-                        {doctorSteps[activeDoctorStep]?.subtitle}
-                      </p>
+                      {/* Connecting Line */}
+                      {idx < doctorSteps.length - 1 && (
+                        <div className="absolute left-6 top-12 w-0.5 h-4 bg-gradient-to-b from-emerald-500/50 to-emerald-400/50 group-hover:from-emerald-500 group-hover:to-emerald-400 transition-colors duration-300"></div>
+                      )}
                     </div>
                   </div>
+                ))}
+              </div>
 
-                  {/* Progress Indicator */}
-                  <div className="mt-6 flex items-center gap-2">
-                    {doctorSteps.map((_, idx) => (
-                      <div
-                        key={idx}
-                        className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                          idx === activeDoctorStep
-                            ? 'bg-emerald-500 w-4'
-                            : 'bg-gray-300'
-                        }`}
-                      />
-                    ))}
+              {/* Right: Icon Display */}
+              <div className="flex-1 relative min-h-[600px] flex items-center justify-center">
+                {/* Animated Background Elements */}
+                <div className="absolute inset-0 pointer-events-none -z-10">
+                  <div className="absolute top-12 left-1/4 w-72 h-72 bg-emerald-100 rounded-full blur-3xl opacity-40 animate-blob"></div>
+                  <div className="absolute bottom-16 right-1/4 w-96 h-96 bg-emerald-200 rounded-full blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
+                  {/* Animated Medical Icons */}
+                  <Stethoscope className="absolute top-24 right-24 w-12 h-12 text-emerald-400 opacity-60 animate-float-slow" />
+                  <FileText className="absolute bottom-24 left-24 w-10 h-10 text-emerald-300 opacity-50 animate-float" />
+                </div>
+                
+                <div className="relative w-[400px] h-[400px] rounded-3xl bg-gradient-to-br from-emerald-50 to-emerald-100 flex items-center justify-center">
+                  <div className="text-center">
+                    {(() => {
+                      const Icon = doctorSteps[activeDoctorStep]?.icon || Stethoscope;
+                      return <Icon className="w-20 h-20 text-emerald-500 mx-auto mb-4 transition-all duration-300" />;
+                    })()}
+                    <p className="text-emerald-600 font-medium text-lg">
+                      {doctorSteps[activeDoctorStep]?.title || "Doctor's Workflow"}
+                    </p>
                   </div>
                 </div>
-              )}
+              </div>
             </div>
           </div>
         </div>

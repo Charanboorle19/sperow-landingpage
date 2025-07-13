@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Brain, FileUp, History, Mic, Pill, MessageCircle, Smartphone, Users, Zap, Stethoscope, ClipboardList, FileText, Clock, MessageSquare, Send, QrCode, Sparkles } from 'lucide-react';
+import { Brain, FileUp, History, Mic, Pill, MessageCircle, Smartphone, Users, Zap, Stethoscope, ClipboardList, FileText, Clock, MessageSquare, Send, QrCode, Sparkles, ArrowRight } from 'lucide-react';
 
 const services = [
   {
@@ -93,6 +93,7 @@ const Features = () => {
   const [isHovering, setIsHovering] = useState(false);
   const [floatY, setFloatY] = useState(0);
   const [deviceOrientation, setDeviceOrientation] = useState({ x: 0, y: 0 });
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   // Device motion handler
   useEffect(() => {
@@ -153,6 +154,18 @@ const Features = () => {
     setMousePosition({ x: rotateY, y: rotateX });
   };
 
+  const scrollLeft = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: -288, behavior: 'smooth' });
+    }
+  };
+
+  const scrollRight = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: 288, behavior: 'smooth' });
+    }
+  };
+
   return (
     <section 
       id="features" 
@@ -184,7 +197,62 @@ const Features = () => {
             <p className="text-gray-500 max-w-xl">Experience the future of healthcare with intelligent features that streamline workflows and enhance patient care.</p>
           </div>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {/* Mobile: Horizontal scrollable layout */}
+        <div className="sm:hidden">
+          <div ref={scrollContainerRef} className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
+            {services.map((service, idx) => (
+              <div
+                key={service.title}
+                className="relative group rounded-2xl bg-white/80 backdrop-blur-sm shadow-lg border border-gray-100 px-6 py-6 flex flex-col justify-between min-h-[240px] overflow-hidden transition-all duration-500 hover:shadow-2xl hover:scale-[1.02] hover:z-20 hover:bg-gradient-to-br hover:from-blue-700/80 hover:to-blue-500/90 hover:border-blue-400 flex-shrink-0 w-72"
+                style={{
+                  transform: isHovering 
+                    ? `perspective(900px) rotateX(${mousePosition.y}deg) rotateY(${mousePosition.x}deg) translateZ(10px) translateY(${floatY}px)`
+                    : `perspective(900px) rotateX(${deviceOrientation.y}deg) rotateY(${deviceOrientation.x}deg) translateZ(10px) translateY(${floatY}px)`,
+                  transition: 'transform 0.2s ease-out'
+                }}
+              >
+                {/* Listed Number (watermark style, behind content) */}
+                <span className="absolute top-3 left-3 text-6xl font-extrabold text-blue-900/10 select-none pointer-events-none z-0">
+                  {String(idx + 1).padStart(2, '0')}
+                </span>
+                {/* Animated background elements */}
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-white opacity-0 group-hover:opacity-20 transition-opacity duration-500" />
+                <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-blue-400 rounded-2xl opacity-0 group-hover:opacity-60 blur transition-all duration-500 group-hover:blur-xl" />
+                {/* Glowing border on hover */}
+                <div className="absolute -inset-1 rounded-2xl border-2 border-blue-400 opacity-0 group-hover:opacity-80 group-hover:blur-md transition-all duration-500 pointer-events-none" />
+                {/* Card content */}
+                <div className="relative z-10 flex flex-col gap-3 pt-6 pl-3">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 rounded-lg bg-blue-50 group-hover:bg-blue-600 transition-colors duration-300">
+                      <service.icon className="w-5 h-5 text-blue-600 group-hover:text-white group-hover:animate-bounce" />
+                    </div>
+                    <h3 className="text-base font-bold text-gray-900 group-hover:text-white transition-none">{service.title}</h3>
+                  </div>
+                  <p className="text-gray-600 group-hover:text-white text-xs transition-none">{service.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          {/* Mobile Navigation Arrows */}
+          <div className="flex justify-center items-center gap-4 mt-6">
+            <button 
+              onClick={scrollLeft}
+              className="p-3 rounded-full bg-blue-600 text-white hover:bg-blue-700 transition-colors duration-300 shadow-lg"
+            >
+              <ArrowRight className="w-5 h-5 rotate-180" />
+            </button>
+            <button 
+              onClick={scrollRight}
+              className="p-3 rounded-full bg-blue-600 text-white hover:bg-blue-700 transition-colors duration-300 shadow-lg"
+            >
+              <ArrowRight className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
+
+        {/* Desktop: Original grid layout */}
+        <div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {services.map((service, idx) => (
             <div
               key={service.title}

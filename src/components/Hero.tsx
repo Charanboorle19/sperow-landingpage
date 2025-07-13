@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { ArrowRight, Play, CheckCircle, Heart, Zap, Sparkles } from 'lucide-react';
-import heroImage1 from '../assets/Screenshot 2025-05-14 200319.png';
-import heroImage2 from '../assets/Screenshot 2025-06-06 234027.png';
+import heroImage1 from '../assets/sperow-image.png';
+import heroImage2 from '../assets/sperow-image2.png';
 
 const Hero = () => {
   const imageRef = useRef<HTMLImageElement>(null);
