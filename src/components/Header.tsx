@@ -29,6 +29,7 @@ const Header = () => {
       'features': 'features',
       'how-it-works': 'howitworks',
       'benefits': 'benefits',
+      'pricing': 'pricing',
       'contact': 'contact'
     };
 
@@ -98,7 +99,8 @@ const Header = () => {
             {[
               { name: 'Features', id: 'features' },
               { name: 'How it Works', id: 'how-it-works' },
-              { name: 'Benefits', id: 'benefits' }
+              { name: 'Benefits', id: 'benefits' },
+              { name: 'Pricing', id: 'pricing' }
             ].map((item, index) => (
               <motion.button 
                 key={item.id}
@@ -161,6 +163,7 @@ const Header = () => {
                   { name: 'Features', id: 'features' },
                   { name: 'How it Works', id: 'how-it-works' },
                   { name: 'Benefits', id: 'benefits' },
+                  { name: 'Pricing', id: 'pricing' },
                   { name: 'Contact', id: 'contact' }
                 ].map((item, index) => (
                   <motion.button 

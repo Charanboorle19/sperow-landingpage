@@ -6,6 +6,7 @@ import Features from './components/Features';
 import HowItWorks from './components/HowItWorks';
 import AboutUs from './components/AboutUs';
 import ContactForm from './components/ContactForm';
+import Pricing from './components/pricing';
 import Footer from './components/Footer';
 
 function App() {
@@ -18,9 +19,7 @@ function App() {
         <HowItWorks />
         <Features />
         <Benefits />
-       
-       
-        
+        <Pricing />
         <ContactForm />
       </main>
       <Footer />
