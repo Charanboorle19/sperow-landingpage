@@ -47,6 +47,7 @@ const Footer = () => {
               <a href="#features" className="text-sm sm:text-base text-gray-600 hover:text-blue-600 transition-colors duration-300">Features</a>
               <a href="#benefits" className="text-sm sm:text-base text-gray-600 hover:text-blue-600 transition-colors duration-300">Benefits</a>
               <a href="#how-it-works" className="text-sm sm:text-base text-gray-600 hover:text-blue-600 transition-colors duration-300">How It Works</a>
+              <a href="#pricing" className="text-sm sm:text-base text-gray-600 hover:text-blue-600 transition-colors duration-300">Pricing</a>
               <a href="#about" className="text-sm sm:text-base text-gray-600 hover:text-blue-600 transition-colors duration-300">About Us</a>
             </div>
           </div>
