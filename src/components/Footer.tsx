@@ -1,5 +1,7 @@
 import React from 'react';
 import { Mail, Phone, MapPin, ArrowUpRight } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
@@ -68,8 +70,24 @@ const Footer = () => {
               © {new Date().getFullYear()} SPEROWERSE PRIVATE LIMITED. All rights reserved.
             </p>
             <div className="flex items-center gap-6 text-sm">
-              <a href="#" className="text-gray-600 hover:text-blue-600 transition-colors duration-300">Privacy Policy</a>
-              <a href="#" className="text-gray-600 hover:text-blue-600 transition-colors duration-300">Terms of Service</a>
+              <Link 
+                to="/refund-policy"
+                className="text-gray-600 hover:text-blue-600 transition-colors duration-300"
+              >
+                Refund Policy
+              </Link>
+              <Link 
+                to="/privacy-policy"
+                className="text-gray-600 hover:text-blue-600 transition-colors duration-300"
+              >
+                Privacy Policy
+              </Link>
+              <Link 
+                to="/terms-and-conditions"
+                className="text-gray-600 hover:text-blue-600 transition-colors duration-300"
+              >
+                Terms and conditions
+              </Link>
             </div>
           </div>
         </div>

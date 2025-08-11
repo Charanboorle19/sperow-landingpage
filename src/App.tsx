@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Benefits from './components/Benefits';
@@ -8,22 +9,43 @@ import AboutUs from './components/AboutUs';
 import ContactForm from './components/ContactForm';
 import Pricing from './components/pricing';
 import Footer from './components/Footer';
+import TermsAndConditions from './components/termsandconditions';
+import PrivacyAndPolicy from './components/Privacyandpolicy';
+import RefundPolicy from './components/RefundPolicy';
 
 function App() {
   return (
-    <div className="min-h-screen bg-white">
-      <Header />
-      <main>
-        <Hero />
-        <AboutUs />
-        <HowItWorks />
-        <Features />
-        <Benefits />
-        <Pricing />
-        <ContactForm />
-      </main>
-      <Footer />
-    </div>
+    <Router>
+      <div className="min-h-screen bg-white">
+        <Routes>
+          {/* Home Page */}
+          <Route path="/" element={
+            <>
+              <Header />
+              <main>
+                <Hero />
+                <AboutUs />
+                <HowItWorks />
+                <Features />
+                <Benefits />
+                <Pricing />
+                <ContactForm />
+              </main>
+              <Footer />
+            </>
+          } />
+          
+          {/* Terms and Conditions Page - Standalone */}
+          <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
+          
+          {/* Privacy Policy Page - Standalone */}
+          <Route path="/privacy-policy" element={<PrivacyAndPolicy />} />
+          
+          {/* Refund Policy Page - Standalone */}
+          <Route path="/refund-policy" element={<RefundPolicy />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
