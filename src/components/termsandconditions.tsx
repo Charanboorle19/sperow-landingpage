@@ -154,7 +154,7 @@ const TermsAndConditions = () => {
             <div className="bg-gray-50 rounded-lg p-4">
               <ul className="list-disc list-inside space-y-2 ml-4">
                 <li>AI can generate prescriptions within ~10 seconds based on notes and analysis.</li>
-                <li>You must verify and approve every prescription before it is sent to the patient via WhatsApp.</li>
+                <li>You must verify and approve every prescription before it is sent to the patient.</li>
                 <li>Follow-up appointments can be scheduled through the platform at your discretion.</li>
               </ul>
             </div>
@@ -269,7 +269,7 @@ const TermsAndConditions = () => {
             <p className="mb-4">For support or questions:</p>
             <div className="bg-gray-50 rounded-lg p-4">
               <p className="font-medium text-gray-900">SPEROWERSE PRIVATE LIMITED</p>
-              <p className="text-gray-600">📧 contact@sperow.com</p>
+              <p className="text-gray-600">📧 contact@sperow.in</p>
               <p className="text-gray-600">📍 Banjara hills Road no 3, Hyderabad, Telangana, India</p>
             </div>
           </section>

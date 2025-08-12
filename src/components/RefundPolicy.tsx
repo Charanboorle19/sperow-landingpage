@@ -141,7 +141,7 @@ const RefundPolicy = () => {
             </h2>
             <div className="bg-blue-50 rounded-lg p-4">
               <ul className="list-disc list-inside space-y-2 ml-4">
-                <li>Eligible refund requests must be submitted to <strong>contact@sperow.com</strong> within 7 days of the payment date.</li>
+                <li>Eligible refund requests must be submitted to <strong>contact@sperow.in</strong> within 7 days of the payment date.</li>
                 <li>Once approved, refunds will be processed within 7–10 working days through the original payment method.</li>
                 <li>Processing times may vary depending on your bank or payment provider.</li>
               </ul>
@@ -176,7 +176,7 @@ const RefundPolicy = () => {
             <p className="mb-4">For cancellation or refund requests, contact:</p>
             <div className="bg-gray-50 rounded-lg p-4">
               <p className="font-medium text-gray-900">SPEROWERSE PRIVATE LIMITED</p>
-              <p className="text-gray-600">📧 contact@sperow.com</p>
+              <p className="text-gray-600">📧 contact@sperow.in</p>
               <p className="text-gray-600">📍 Banjara hills Road no 3, Hyderabad, Telangana, India</p>
             </div>
           </section>

@@ -123,7 +123,7 @@ const PrivacyAndPolicy = () => {
                 <li>Display your patient appointments and historical records.</li>
                 <li>Generate AI-assisted consultation notes and prescriptions.</li>
                 <li>Enable chatbots for patient history queries.</li>
-                <li>Deliver prescriptions to patients via WhatsApp.</li>
+                                 <li>Deliver prescriptions to patients.</li>
                 <li>Improve AI models and platform performance (with anonymized data).</li>
                 <li>Detect and prevent security breaches or unauthorized access.</li>
               </ul>
@@ -163,7 +163,7 @@ const PrivacyAndPolicy = () => {
             <p className="mb-4">We do not sell or share your data with third parties, except:</p>
             <div className="bg-green-50 border-l-4 border-green-400 p-4">
               <ul className="list-disc list-inside space-y-2 ml-4">
-                <li>With patient consent for prescription delivery via WhatsApp.</li>
+                                 <li>With patient consent for prescription delivery.</li>
                 <li>With authorized hospital administrators for operational purposes.</li>
                 <li>If required by law to comply with legal obligations or court orders.</li>
               </ul>
@@ -244,7 +244,7 @@ const PrivacyAndPolicy = () => {
             <p className="mb-4">For privacy-related questions or requests, contact us:</p>
             <div className="bg-gray-50 rounded-lg p-4">
               <p className="font-medium text-gray-900">SPEROWERSE PRIVATE LIMITED</p>
-              <p className="text-gray-600">📧 contact@sperow.com</p>
+              <p className="text-gray-600">📧 contact@sperow.in</p>
               <p className="text-gray-600">📍 Banjara hills Road no 3, Hyderabad, Telangana, India</p>
             </div>
           </section>

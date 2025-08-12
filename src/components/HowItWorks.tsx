@@ -75,7 +75,7 @@ const doctorSteps: DoctorStep[] = [
   },
   {
     title: 'Close & Share',
-    subtitle: 'Complete consultation and automatically share prescription via WhatsApp/SMS.',
+            subtitle: 'Complete consultation and automatically share prescription.',
     icon: Send
   },
   {

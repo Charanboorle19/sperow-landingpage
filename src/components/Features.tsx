@@ -46,7 +46,7 @@ const services = [
   },
   {
     icon: Send,
-    title: "WhatsApp/SMS Prescription Delivery",
+            title: "Prescription Delivery",
     desc: "Patients instantly receive prescription post-consultation.",
     appointment: "#",
     price: "#"

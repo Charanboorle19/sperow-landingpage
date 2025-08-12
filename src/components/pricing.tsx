@@ -8,7 +8,6 @@ import {
   FaRobot, 
   FaBrain, 
   FaFilePrescription, 
-  FaWhatsapp, 
   FaCalendarAlt, 
   FaStickyNote, 
   FaEdit, 
@@ -37,7 +36,6 @@ const Pricing = () => {
         'AI-Powered Chatbot',
         'Smart AI Assistant',
         'Auto Prescription Generation',
-        'WhatsApp Integration',
         'Appointment Booking System',
         'AI Doctor Notes Generation',
         'Editable Notes Panel',
@@ -62,7 +60,6 @@ const Pricing = () => {
         '2 Hrs Voice Assistant per Month',
         'AI-Powered Chatbot',
         'Auto Prescription Generation',
-        'WhatsApp Integration',
         'Appointment Booking System',
         'AI Doctor Notes Generation',
         'Priority Support'
@@ -377,20 +374,7 @@ const Pricing = () => {
                       </span>
                     </div>
                   ))}
-                  {plan.features.length > 6 && (
-                    <div className="flex items-start gap-2">
-                      <div className={`flex-shrink-0 w-4 h-4 rounded-full flex items-center justify-center ${
-                        plan.popular ? 'bg-white/20' : 'bg-blue-100'
-                      }`}>
-                        <FaCheck className={`w-2.5 h-2.5 ${plan.popular ? 'text-white' : 'text-blue-600'}`} />
-                      </div>
-                      <span className={`text-xs leading-relaxed ${
-                        plan.popular ? 'text-blue-100' : 'text-gray-700'
-                      }`}>
-                        +{plan.features.length - 6} more features
-                      </span>
-                    </div>
-                  )}
+
                 </div>
               ) : null}
 
