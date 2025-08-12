@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <!-- Background circle -->
+  <circle cx="16" cy="16" r="15" fill="#3B82F6" stroke="#1E40AF" stroke-width="2"/>
+  
+  <!-- Medical cross -->
+  <rect x="14" y="8" width="4" height="16" fill="white" rx="1"/>
+  <rect x="8" y="14" width="16" height="4" fill="white" rx="1"/>
+  
+  <!-- AI/tech elements - small dots representing data/connectivity -->
+  <circle cx="8" cy="8" r="1.5" fill="#60A5FA"/>
+  <circle cx="24" cy="8" r="1.5" fill="#60A5FA"/>
+  <circle cx="8" cy="24" r="1.5" fill="#60A5FA"/>
+  <circle cx="24" cy="24" r="1.5" fill="#60A5FA"/>
+  
+  <!-- Center AI element -->
+  <circle cx="16" cy="16" r="3" fill="none" stroke="#60A5FA" stroke-width="1.5" stroke-dasharray="2,2"/>
+</svg>
