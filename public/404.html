@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Page Not Found</title>
+    <script>
+        // Single Page Apps for GitHub Pages / Static Servers
+        // This script checks to see if a redirect is present in the query string,
+        // converts it back into the correct url and adds it to the
+        // browser's history using window.history.replaceState(...),
+        // which won't cause the browser to attempt to server-side render the new url.
+        
+        // If the redirect is not present, the page is not found and we redirect to the home page
+        var redirect = window.location.search.match(/redirect=([^&]+)/);
+        if (redirect) {
+            window.history.replaceState(null, null, redirect[1]);
+        } else {
+            window.location.replace('/');
+        }
+    </script>
+</head>
+<body>
+    <p>Redirecting...</p>
+</body>
+</html>
