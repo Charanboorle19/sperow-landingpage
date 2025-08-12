@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { FileText, Shield, Users, Lock, AlertTriangle, Calendar, ArrowLeft, Building, Globe, Scale, Mail, MapPin } from 'lucide-react';
+import { FileText, Shield, Calendar, ArrowLeft, Building, AlertTriangle } from 'lucide-react';
 
 const TermsAndConditions = () => {
   useEffect(() => {

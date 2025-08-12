@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Shield, Users, Lock, AlertTriangle, Calendar, Mic, MessageSquare, ArrowLeft, Eye, Database, Bell, UserCheck } from 'lucide-react';
+import { Shield, Users, Lock, Calendar, Mic, ArrowLeft, Eye, Database, Bell, UserCheck } from 'lucide-react';
 
 const PrivacyAndPolicy = () => {
   useEffect(() => {

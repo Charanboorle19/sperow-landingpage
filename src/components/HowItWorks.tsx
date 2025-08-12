@@ -1,6 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { ArrowRight, CheckCircle, Sparkles, ChevronRight, Stethoscope, LogIn, Calendar, PlayCircle, FileText, Mic, FileCheck, Edit, MessageSquare, Send, Play, Plus, QrCode, ClipboardList, Upload, MessageCircle, Ticket, Database } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowRight, Sparkles, ChevronRight, Stethoscope, LogIn, Calendar, FileText, FileCheck, Edit, MessageCircle, Ticket, Database, QrCode, ClipboardList, Upload, Plus, Send } from 'lucide-react';
 
 interface PatientStep {
   title: string;
@@ -121,10 +120,7 @@ const HowItWorks = () => {
     };
   }, [isMobile]);
 
-  const renderStepIcon = (step: DoctorStep) => {
-    const Icon = step.icon;
-    return <Icon className="w-16 h-16 text-emerald-500 relative z-10" />;
-  };
+
 
   const scrollPatientLeft = () => {
     if (patientScrollRef.current) {

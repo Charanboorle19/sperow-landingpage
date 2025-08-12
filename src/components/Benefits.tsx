@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Clock, FileText, Mic, Lock, ClipboardList, MessageCircle, Users, Zap, Sparkles, ArrowRight } from 'lucide-react';
+import { Clock, FileText, Mic, Lock, ClipboardList, MessageCircle, Zap, Sparkles, ArrowRight } from 'lucide-react';
 
 const benefits = [
   {

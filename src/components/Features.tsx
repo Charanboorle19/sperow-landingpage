@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Brain, FileUp, History, Mic, Pill, MessageCircle, Smartphone, Users, Zap, Stethoscope, ClipboardList, FileText, Clock, MessageSquare, Send, QrCode, Sparkles, ArrowRight } from 'lucide-react';
+import { Brain, FileUp, History, Mic, ClipboardList, MessageSquare, Send, QrCode, Sparkles, ArrowRight } from 'lucide-react';
 
 const services = [
   {
@@ -67,26 +67,7 @@ const services = [
   }
 ];
 
-const AnimatedBlobs = () => (
-  <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <g filter="url(#blur1)">
-      <ellipse cx="120" cy="120" rx="80" ry="60" fill="#2563eb" fillOpacity="0.35">
-        <animate attributeName="cx" values="120;180;120" dur="6s" repeatCount="indefinite" />
-      </ellipse>
-      <ellipse cx="280" cy="180" rx="60" ry="40" fill="#1e40af" fillOpacity="0.25">
-        <animate attributeName="cy" values="180;120;180" dur="7s" repeatCount="indefinite" />
-      </ellipse>
-      <ellipse cx="200" cy="100" rx="40" ry="30" fill="#60a5fa" fillOpacity="0.18">
-        <animate attributeName="cx" values="200;250;200" dur="5s" repeatCount="indefinite" />
-      </ellipse>
-    </g>
-    <defs>
-      <filter id="blur1" x="-50" y="-50" width="500" height="400" filterUnits="userSpaceOnUse">
-        <feGaussianBlur stdDeviation="30" />
-      </filter>
-    </defs>
-  </svg>
-);
+
 
 const Features = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });

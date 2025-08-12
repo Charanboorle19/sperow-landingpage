@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 const AboutUs = () => {
   return (
-    <section className="py-24 w-full relative overflow-hidden bg-gradient-to-br from-white via-green-50/50 to-emerald-50/30">
+    <section id="about" className="py-24 w-full relative overflow-hidden bg-gradient-to-br from-white via-green-50/50 to-emerald-50/30">
       {/* Grid Background Pattern */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:4rem_4rem]"></div>
       

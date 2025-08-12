@@ -3,21 +3,9 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { 
-  FaDatabase, 
   FaMicrophone, 
   FaRobot, 
-  FaBrain, 
-  FaFilePrescription, 
-  FaCalendarAlt, 
-  FaStickyNote, 
-  FaEdit, 
-  FaChartLine, 
-  FaComments, 
-  FaHistory, 
-  FaBell,
-  FaCheck,
-  FaStar,
-  FaCrown,
+  FaComments,
   FaCrosshairs,
   FaArrowRight
 } from 'react-icons/fa';

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Shield, Users, Calendar, ArrowLeft, CreditCard, XCircle, CheckCircle, AlertTriangle, Clock, Mail, MapPin, DollarSign } from 'lucide-react';
+import { Users, Calendar, ArrowLeft, XCircle, AlertTriangle, DollarSign } from 'lucide-react';
 
 const RefundPolicy = () => {
   useEffect(() => {

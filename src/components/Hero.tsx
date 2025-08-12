@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { ArrowRight, Play, CheckCircle, Heart, Zap, Sparkles } from 'lucide-react';
+import { ArrowRight, CheckCircle, Sparkles } from 'lucide-react';
 import heroImage1 from '../assets/sperow-image.png';
 import heroImage2 from '../assets/sperow-image2.png';
 
