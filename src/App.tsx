@@ -8,6 +8,7 @@ import HowItWorks from './components/HowItWorks';
 import AboutUs from './components/AboutUs';
 import ContactForm from './components/ContactForm';
 import Pricing from './components/pricing';
+import Payment from './components/payment';
 import Footer from './components/Footer';
 import TermsAndConditions from './components/termsandconditions';
 import PrivacyAndPolicy from './components/Privacyandpolicy';
@@ -34,6 +35,9 @@ function App() {
               <Footer />
             </>
           } />
+          
+          {/* Payment Page */}
+          <Route path="/payment" element={<Payment />} />
           
           {/* Terms and Conditions Page - Standalone */}
           <Route path="/terms-and-conditions" element={<TermsAndConditions />} />

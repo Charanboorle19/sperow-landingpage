@@ -12,6 +12,44 @@ import {
 
 const Pricing = () => {
   const [selectedBundlePlan, setSelectedBundlePlan] = useState<{name: string; description: string} | null>(null);
+  
+  const handleStartFreeTrial = async () => {
+    try {
+      console.log('🚀 Starting free trial...');
+      const response = await fetch('https://b830064b2d9b.ngrok-free.app/api/payments/phonepe/create', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkb2N0b3JfaWQiOjEsImVtYWlsIjoidGVzdDFAZ21haWwuY29tIiwicm9sZSI6ImRvY3RvciIsImV4cCI6MTc1NTYyOTg0MX0.pqWEfgDYSXtWoadWeJBhsnCHX67nkzfUJhnzTveP8WU'
+        },
+        body: JSON.stringify({
+          doctor_id: 1,
+          purpose: "addon",
+          add_on_id: 1,
+          client_redirect_path: "/payments/thank-you"
+        })
+      });
+      
+      if (response.ok) {
+        const data = await response.json();
+        console.log('✅ Free trial started successfully:', data);
+        
+        // Redirect to payment page with all payment data
+        if (data.merchant_order_id) {
+          const paymentData = encodeURIComponent(JSON.stringify(data));
+          window.location.href = `/payment?data=${paymentData}`;
+        } else {
+          console.error('❌ No merchant order ID in response');
+        }
+      } else {
+        console.error('❌ Failed to start free trial:', response.status, response.statusText);
+        // You can add error handling here (e.g., show error message)
+      }
+    } catch (error) {
+      console.error('❌ Error starting free trial:', error);
+      // You can add error handling here (e.g., show error message)
+    }
+  };
   const plans = [
     {
       name: 'Free Trial Plan',
@@ -371,6 +409,7 @@ const Pricing = () => {
                 <motion.button
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
+                  onClick={plan.trial ? handleStartFreeTrial : undefined}
                   className={`w-full py-3 px-6 rounded-lg font-semibold transition-all duration-300 ${
                     plan.trial
                       ? 'bg-green-600 text-white hover:bg-green-700'
