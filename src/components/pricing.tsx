@@ -58,7 +58,7 @@ const Pricing = () => {
       period: '/7 days',
       features: [
         '5GB Secure Patient Data Storage (up to 20,000 patients)',
-        '2 Hrs Voice Assistant per Month',
+        '2 Hrs Voice Assistant per Day',
         'AI-Powered Chatbot',
         'Smart AI Assistant',
         'Auto Prescription Generation',
@@ -83,7 +83,7 @@ const Pricing = () => {
       features: [
         'All Basic Features',
         '5GB Secure Patient Data Storage (up to 20,000 patients)',
-        '2 Hrs Voice Assistant per Month',
+        '2 Hrs Voice Assistant per Day',
         'AI-Powered Chatbot',
         'Auto Prescription Generation',
         'Appointment Booking System',
