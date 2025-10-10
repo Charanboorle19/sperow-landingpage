@@ -29,7 +29,7 @@ const Header = () => {
       'features': 'features',
       'how-it-works': 'howitworks',
       'benefits': 'benefits',
-      'pricing': 'pricing',
+      'pricing': 'contact',
       'contact': 'contact'
     };
 

@@ -1,4 +1,3 @@
-import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Hero from './components/Hero';
@@ -7,7 +6,7 @@ import Features from './components/Features';
 import HowItWorks from './components/HowItWorks';
 import AboutUs from './components/AboutUs';
 import ContactForm from './components/ContactForm';
-import Pricing from './components/pricing';
+
 import Payment from './components/payment';
 import Footer from './components/Footer';
 import TermsAndConditions from './components/termsandconditions';
@@ -29,7 +28,7 @@ function App() {
                 <HowItWorks />
                 <Features />
                 <Benefits />
-                <Pricing />
+                
                 <ContactForm />
               </main>
               <Footer />
