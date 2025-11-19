@@ -16,7 +16,7 @@ const Footer = () => {
             <div className="space-y-3 sm:space-y-4">
               <a href="mailto:contact@sperow.in" className="flex items-center gap-2 sm:gap-3 text-sm sm:text-base text-gray-600 hover:text-blue-600 transition-colors duration-300 group">
                 <Mail className="w-4 h-4 sm:w-5 sm:h-5 text-blue-500 group-hover:scale-110 transition-transform duration-300" />
-                <span>contact@sperow.com</span>
+                <span>contact@sperow.in</span>
                 <ArrowUpRight className="w-3 h-3 sm:w-4 sm:h-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </a>
               <a href="tel:+918978222739" className="flex items-center gap-2 sm:gap-3 text-sm sm:text-base text-gray-600 hover:text-blue-600 transition-colors duration-300 group">
