@@ -1,14 +1,15 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { ArrowRight, CheckCircle, Sparkles } from 'lucide-react';
-import heroImage1 from '../assets/sperow-image.png';
-import heroImage2 from '../assets/sperow-image2.png';
+import heroImage1 from '../assets/Header section.png';
+import heroImage2 from '../assets/reports.png';
+import heroImage3 from '../assets/dashboard.png';
 
 const Hero = () => {
   const imageRef = useRef<HTMLImageElement>(null);
   const [isHovering, setIsHovering] = useState(false);
   const [hoverTransform, setHoverTransform] = useState('');
   const [floatY, setFloatY] = useState(0);
-  const [frontImage, setFrontImage] = useState<1 | 2>(1);
+  const [frontImage, setFrontImage] = useState<1 | 2 | 3>(1);
   const [deviceOrientation, setDeviceOrientation] = useState({ x: 0, y: 0 });
 
   const scrollToContact = () => {
@@ -71,7 +72,7 @@ const Hero = () => {
   // Swap images every 5 seconds
   useEffect(() => {
     const interval = setInterval(() => {
-      setFrontImage((prev) => (prev === 1 ? 2 : 1));
+      setFrontImage((prev) => ((prev % 3) + 1) as 1 | 2 | 3);
     }, 5000);
     return () => clearInterval(interval);
   }, []);
@@ -174,6 +175,14 @@ const Hero = () => {
           src={heroImage2}
           alt="AI Healthcare Hero 2"
           className={`rounded-2xl md:rounded-3xl shadow-xl md:shadow-2xl border-2 md:border-4 border-white/80 object-contain max-w-[320px] md:max-w-[850px] max-h-[320px] md:max-h-[440px] w-auto h-auto transition-all duration-700 ease-out absolute ${frontImage === 2 ? 'z-20 scale-100 opacity-100' : 'z-10 scale-90 opacity-60 blur-[2px]'} select-none`}
+          style={{ transform: finalTransform }}
+          draggable={false}
+        />
+        <img
+          ref={frontImage === 3 ? imageRef : undefined}
+          src={heroImage3}
+          alt="AI Healthcare Dashboard"
+          className={`rounded-2xl md:rounded-3xl shadow-xl md:shadow-2xl border-2 md:border-4 border-white/80 object-contain max-w-[320px] md:max-w-[850px] max-h-[320px] md:max-h-[440px] w-auto h-auto transition-all duration-700 ease-out absolute ${frontImage === 3 ? 'z-20 scale-100 opacity-100' : 'z-10 scale-90 opacity-60 blur-[2px]'} select-none`}
           style={{ transform: finalTransform }}
           draggable={false}
         />
