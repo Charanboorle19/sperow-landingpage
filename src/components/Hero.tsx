@@ -117,14 +117,14 @@ const Hero = () => {
           <span className="text-xs md:text-sm font-medium text-blue-600">AI-Powered Healthcare Platform</span>
         </div>
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight">
-          <span className="block text-gray-900 mb-2 md:mb-3">Streamline Your</span>
+          <span className="block text-gray-900 mb-2 md:mb-3">AI-Powered  </span>
           <span className="block bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
-            Clinical Workflows
+          Clinical Workflow Software
           </span>
-          <span className="block text-gray-900 mt-2 md:mt-3">with AI</span>
+          <span className="block text-gray-900 mt-2 md:mt-3">for Doctors, clinics</span>
         </h1>
         <p className="text-base md:text-lg lg:text-xl text-gray-600 leading-relaxed max-w-2xl mx-auto md:mx-0">
-           <span className="font-semibold text-blue-600"> A platform that makes managing clinical workflows seamless and efficient.</span> 
+           <h2 className="font-semibold text-blue-600"> Simplify patient records, clinical documentation, prescriptions, and OP workflows with AI-powered automation.</h2> 
         </p>
         <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center md:justify-start pt-2">
           <button 

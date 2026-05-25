@@ -172,9 +172,9 @@ const HowItWorks = () => {
                 Quick & Easy
               </span>
             </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto mt-6 text-lg leading-relaxed">
+            <h3 className="text-gray-600 max-w-2xl mx-auto mt-6 text-lg leading-relaxed">
               Our platform makes the pre-op process seamless for patients. Follow these simple steps to get started and ensure your information is ready for your doctor.
-            </p>
+            </h3>
           </div>
 
           {/* Patient Flow Content */}
