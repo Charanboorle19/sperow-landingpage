@@ -1,8 +1,32 @@
-import React from 'react';
 import { Mail, Phone, MapPin, ArrowUpRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { HOME_PATH, isHomePath } from '../constants/routes';
+import { getSectionTargetId, scrollToElementById } from '../utils/scrollToSection';
+
+const QUICK_LINKS = [
+  { label: 'Features', id: 'features' },
+  { label: 'Benefits', id: 'benefits' },
+  { label: 'How It Works', id: 'how-it-works' },
+  { label: 'Pricing', id: 'pricing' },
+  { label: 'About Us', id: 'about' },
+] as const;
 
 const Footer = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const goToSection = (sectionId: string) => {
+    const targetId = getSectionTargetId(sectionId);
+    if (!targetId) return;
+
+    if (!isHomePath(location.pathname)) {
+      navigate(HOME_PATH, { state: { scrollTo: targetId } });
+      return;
+    }
+
+    setTimeout(() => scrollToElementById(targetId), 100);
+  };
+
   return (
     <footer className="bg-gradient-to-br from-gray-50 to-gray-100 py-16 relative overflow-hidden">
       {/* Grid Background Pattern */}
@@ -45,11 +69,16 @@ const Footer = () => {
           <div className="space-y-4 sm:space-y-6">
             <h3 className="text-lg sm:text-xl font-semibold text-gray-900">Quick Links</h3>
             <div className="grid grid-cols-2 gap-3 sm:gap-4">
-              <a href="#features" className="text-sm sm:text-base text-gray-600 hover:text-blue-600 transition-colors duration-300">Features</a>
-              <a href="#benefits" className="text-sm sm:text-base text-gray-600 hover:text-blue-600 transition-colors duration-300">Benefits</a>
-              <a href="#how-it-works" className="text-sm sm:text-base text-gray-600 hover:text-blue-600 transition-colors duration-300">How It Works</a>
-              <a href="#pricing" className="text-sm sm:text-base text-gray-600 hover:text-blue-600 transition-colors duration-300">Pricing</a>
-              <a href="#about" className="text-sm sm:text-base text-gray-600 hover:text-blue-600 transition-colors duration-300">About Us</a>
+              {QUICK_LINKS.map((link) => (
+                <button
+                  key={link.id}
+                  type="button"
+                  onClick={() => goToSection(link.id)}
+                  className="text-left text-sm sm:text-base text-gray-600 hover:text-blue-600 transition-colors duration-300"
+                >
+                  {link.label}
+                </button>
+              ))}
             </div>
           </div>
 

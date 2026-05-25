@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ArrowRight, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { HOME_PATH, isHomePath } from '../constants/routes';
+import { getSectionTargetId, scrollToElementById } from '../utils/scrollToSection';
 
 const NavArrow = () => (
   <span className="inline-block ml-1.5 align-middle transition-all duration-200 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 group-focus:opacity-100 group-focus:translate-x-1">
@@ -13,6 +16,8 @@ const NavArrow = () => (
 );
 
 const Header = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -24,31 +29,27 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToSection = (sectionId: string) => {
-    const sectionMap: { [key: string]: string } = {
-      'features': 'features',
-      'how-it-works': 'howitworks',
-      'benefits': 'benefits',
-      'pricing': 'contact',
-      'contact': 'contact'
-    };
-
-    const targetId = sectionMap[sectionId.toLowerCase()];
-    const section = document.getElementById(targetId);
-    
-    if (section) {
-      setIsMenuOpen(false);
-      
-      setTimeout(() => {
-        const headerHeight = 80;
-        const sectionTop = section.getBoundingClientRect().top + window.pageYOffset - headerHeight;
-        
-        window.scrollTo({
-          top: sectionTop,
-          behavior: 'smooth'
-        });
-      }, 100);
+  const goHome = () => {
+    setIsMenuOpen(false);
+    if (!isHomePath(location.pathname)) {
+      navigate(HOME_PATH);
+      return;
     }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const scrollToSection = (sectionId: string) => {
+    const targetId = getSectionTargetId(sectionId);
+    if (!targetId) return;
+
+    setIsMenuOpen(false);
+
+    if (!isHomePath(location.pathname)) {
+      navigate(HOME_PATH, { state: { scrollTo: targetId } });
+      return;
+    }
+
+    setTimeout(() => scrollToElementById(targetId), 100);
   };
 
   return (
@@ -77,7 +78,7 @@ const Header = () => {
           >
             <div 
               className="relative group cursor-pointer"
-              onClick={() => window.location.reload()}
+              onClick={goHome}
             >
               <div className="relative flex items-center gap-2">
                 <span className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent tracking-tight">
@@ -100,6 +101,7 @@ const Header = () => {
               { name: 'Features', id: 'features' },
               { name: 'How it Works', id: 'how-it-works' },
               { name: 'Benefits', id: 'benefits' },
+              { name: 'Blog', id: 'blog' },
               { name: 'Pricing', id: 'pricing' }
             ].map((item, index) => (
               <motion.button 
@@ -163,6 +165,7 @@ const Header = () => {
                   { name: 'Features', id: 'features' },
                   { name: 'How it Works', id: 'how-it-works' },
                   { name: 'Benefits', id: 'benefits' },
+                  { name: 'Blog', id: 'blog' },
                   { name: 'Pricing', id: 'pricing' },
                   { name: 'Contact', id: 'contact' }
                 ].map((item, index) => (

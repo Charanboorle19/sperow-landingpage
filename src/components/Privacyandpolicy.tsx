@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { HOME_PATH } from '../constants/routes';
 import { Shield, Users, Lock, Calendar, Mic, ArrowLeft, Eye, Database, Bell, UserCheck } from 'lucide-react';
 
 const PrivacyAndPolicy = () => {
@@ -12,7 +13,7 @@ const PrivacyAndPolicy = () => {
       {/* Back Button Only */}
       <div className="pt-6 px-4 sm:px-6 lg:px-8">
         <Link
-          to="/"
+          to={HOME_PATH}
           className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 transition-colors duration-200 font-medium"
         >
           <ArrowLeft className="w-4 h-4" />

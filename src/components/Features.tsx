@@ -175,7 +175,7 @@ const Features = () => {
               Transform Your Practice with<br />
               <span className="text-blue-600">AI-Powered Healthcare Tools</span>
             </h2>
-            <p className="text-gray-500 max-w-xl">Experience the future of healthcare with intelligent features that streamline workflows and enhance patient care.</p>
+            <h3 className="text-gray-500 max-w-xl">Experience the future of healthcare with intelligent features that streamline workflows and enhance patient care.</h3>
           </div>
         </div>
         {/* Mobile: Horizontal scrollable layout */}
